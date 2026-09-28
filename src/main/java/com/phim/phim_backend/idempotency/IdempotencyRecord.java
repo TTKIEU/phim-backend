@@ -13,7 +13,7 @@ import jakarta.persistence.UniqueConstraint;
 
 @Entity 
 @Table (
-    name = "idempotancy_records",
+    name = "idempotency_records",
     uniqueConstraints = {
         @UniqueConstraint (
             columnNames={"user_id","idempotency_key"})})
@@ -34,20 +34,29 @@ public class IdempotencyRecord {
     @Column(nullable=false)
     private Instant createdAt;
 
+    @Column (name="request_hash", nullable = false)
+    private String requestHash;
+
     protected IdempotencyRecord(){};
 
     public IdempotencyRecord(
         String userId,
         String idempotencyKey,
-        UUID postId
+        UUID postId,
+        String requestHash
     ){
         this.userId=userId;
         this.idempotencyKey=idempotencyKey;
         this.postId=postId;
+        this.requestHash=requestHash;
         this.createdAt=Instant.now();
     }
     public UUID getPostId(){
         return postId;
     }
+    public String getRequestHash(){
+        return requestHash;
+    }
+    
     
 }
