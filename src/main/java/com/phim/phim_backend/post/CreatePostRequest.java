@@ -4,7 +4,6 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
-//uuid not included because dont trust Android application
 //defines JSON package payload
 public record CreatePostRequest (
     @NotNull 
